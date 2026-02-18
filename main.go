@@ -37,13 +37,14 @@ func main() {
 	err := yaml.Unmarshal(file, &pipe)
 	
 	if err != nil {
-		logger.Fatal(err.Error())
+		logger.Fatal("", zap.Error(err))
 	}
 	for _, command := range pipe.Steps{
 		logger.Info("Running %s:\n", zap.String("step", command.Name))
 		cmd := exec.Command("sh", "-c", command.Run)
 		output, err := cmd.CombinedOutput()
 		if err != nil{
+			logger.Err("Command "+command.Name+" failed", zap.Error(err))
 		}
 		logger.Info(string(output))
 	}
