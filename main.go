@@ -44,13 +44,10 @@ func main() {
 		cmd := exec.Command("sh", "-c", command.Run)
 		output, err := cmd.CombinedOutput()
 		if err != nil{
-			logger.Err("Command "+command.Name+" failed", zap.Error(err))
-		}
+			logger.Err("Command "+command.Name+" failed", zap.Error(err), zap.String("output", string(output)))
+		}else{
 		logger.Info(string(output))
 	}
-	
-	
-
-
+}
 	
 }
