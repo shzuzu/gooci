@@ -1,0 +1,9 @@
+steps:
+  - name: ECHO install
+    run: echo "install"
+
+  - name: ECHO hello
+    run: eco "hello"
+
+  - name: Test
+    run: go version
